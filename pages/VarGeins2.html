@@ -1,0 +1,125 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<title>Wheat Rust Gene Filter</title>
+<style>
+    body{font-family:Calibri;padding:30px;background:#f5f5f5;}
+    h2{color:#003366;font-size:26px;}
+    select{
+        padding:8px;font-size:16px;margin-bottom:15px;
+        width:60%;border:1px solid #888;border-radius:4px;
+    }
+    .box{background:white;padding:18px;border-radius:5px;width:60%;
+         box-shadow:0 0 5px #aaa;margin-top:15px;}
+    .result{margin-bottom:15px;padding:10px;border-left:5px solid #006699;
+            background:#ffd166;border-radius:4px;}
+    .title{font-weight:bold;color:#000;margin-top:10px;}
+  .home-btn{display:inline-flex;align-items:center;gap:6px; background:#ffd166;}
+.home-icon{width:18px;height:18px;display:block;}
+.home-btn:hover{opacity:0.85;}
+</style>
+<link rel="stylesheet" href="lib/bootstrap-icons.css">
+</head>
+
+<body>
+<a href="../index.html" class="home-btn" style="margin-right:12px;padding:8px 14px;background:#ffd166;color:#000;text-decoration:none;border-radius:8px;font-weight:600;"><i class="bi bi-house"></i>Home</a>
+<h2>Wheat Cultivar Rust Resistance Gene Explorer</h2>
+
+<!-- Cultivar dropdown -->
+<p> Wheat Variety:</p><select id="cultivar" onchange="filterData()">
+    <option value="">-- Select Cultivar --</option>
+</select>
+
+<!-- NEW: Multi-select Gene Search Menu (no repetition) -->
+<p> Resistance Gene:</p><select id="geneSelect"  onchange="searchGenes()"> <option value="">-- Select Resistance Gein--</option></select>
+
+<div class="box" id="output"></div> 
+<div class="box" id="searchResults"></div>
+
+<script>
+// Cultivar Database
+const data = [
+ {cv:"Misr 3", Yr:["Yr15","Yr27","Yr36"], Lr:["Lr24","Lr46"], Sr:["Sr2","Sr24","Sr36"], level:"High"},
+ {cv:"Misr 4", Yr:["Yr17","Yr27","Yr36"], Lr:["Lr37"], Sr:["Sr24","Sr38"], level:"High"},
+ {cv:"Misr 5", Yr:["Yr18","Yr5"], Lr:["Lr34","Lr46"], Sr:["Sr2"], level:"Moderate"},
+ {cv:"Misr 6", Yr:["Yr5","Yr15"], Lr:["Lr24","Lr34","Lr46"], Sr:["Sr24","Sr36"], level:"High"},
+ {cv:"Misr 7", Yr:["Yr15","Yr36"], Lr:["Lr46"], Sr:["Sr24","Sr36","SrTmp"], level:"High"},
+ {cv:"Sids 13", Yr:["Yr5","Yr18"], Lr:["Lr34","Lr46"], Sr:["Sr2","Sr36"], level:"Moderate"},
+ {cv:"Sids 14", Yr:["Yr5","Yr18"], Lr:["Lr24","Lr46"], Sr:["Sr2","Sr36"], level:"Moderate"},
+ {cv:"Sids 15", Yr:["Yr15","Yr18","Yr27"], Lr:["Lr34","Lr46"], Sr:["Sr2","Sr24"], level:"Moderate to High"},
+ {cv:"Sakha 94", Yr:["Yr5","Yr18"], Lr:["Lr34","Lr46"], Sr:["Sr2","Sr24"], level:"Moderate"},
+ {cv:"Sakha 95", Yr:["Yr15","Yr36","YrSP"], Lr:["Lr24","Lr46"], Sr:["Sr24","Sr36","Sr2"], level:"High"},
+ {cv:"Sakha 96", Yr:["Yr15","Yr27"], Lr:["Lr34","Lr46"], Sr:["Sr24","Sr36"], level:"High"},
+ {cv:"Sakha 97", Yr:["Yr15","Yr36"], Lr:["Lr24","Lr46"], Sr:["Sr2","Sr24","SrTmp"], level:"High"},
+ {cv:"Shandweel 1", Yr:["Yr5","Yr18"], Lr:["Lr34","Lr46"], Sr:["Sr2","Sr24"], level:"Moderate"},
+ {cv:"Giza 168", Yr:["Yr5","Yr18"], Lr:["Lr34","Lr46"], Sr:["Sr2","Sr24"], level:"Moderate"},
+ {cv:"Gemmeiza 12", Yr:["Yr9","Yr18"], Lr:["Lr24","Lr46"], Sr:["Sr2","Sr24"], level:"Moderate"},
+ {cv:"Giza 171", Yr:["Yr15","Yr36"], Lr:["Lr46","Lr34"], Sr:["Sr2","Sr24","Sr36"], level:"High"},
+ {cv:"Sohag 3", Yr:["Yr15","Yr27"], Lr:["Lr24","Lr46"], Sr:["Sr24","Sr36"], level:"High"},
+ {cv:"Sohag 4", Yr:["Yr15","Yr36"], Lr:["Lr34","Lr46"], Sr:["Sr2","Sr24"], level:"High"},
+ {cv:"Beni Suef 5", Yr:["Yr5","Yr27"], Lr:["Lr24","Lr46"], Sr:["Sr24","Sr36"], level:"Moderate"},
+ {cv:"Beni Suef 7", Yr:["Yr15","Yr36"], Lr:["Lr34","Lr46"], Sr:["Sr2","Sr24","Sr36"], level:"High"}
+];
+
+// Fill cultivar dropdown
+data.forEach(x=>cultivar.innerHTML+=`<option value="${x.cv}">${x.cv}</option>`);
+
+// Collect unique genes
+const uniqueGenes = [...new Set([
+    ...data.flatMap(x=>x.Yr),
+    ...data.flatMap(x=>x.Lr),
+    ...data.flatMap(x=>x.Sr)
+])].sort();
+
+// Populate gene dropdown (no repetition)
+uniqueGenes.forEach(g=>geneSelect.innerHTML+=`<option value="${g}">${g}</option>`);
+
+// Display cultivar details
+function filterData(){
+    let item=data.find(x=>x.cv===cultivar.value);
+    if(!item){output.innerHTML="";return;}
+    output.innerHTML=`
+        <div class='title'>Yellow Rust Genes (Yr):<span style="color:red">${item.Yr.join(", ")}</span></div>
+        <div class='title'>Leaf Rust Genes (Lr):<span style="color:red">${item.Lr.join(", ")}</span></div>
+        <div class='title'>Stem Rust Genes (Sr):<span style="color:red">${item.Sr.join(", ")}</span></div>
+        <div class='title'>Resistance Level:<span style="color:red">${item.level}</span></div>
+    `;
+}
+
+// NEW: Filter by selected genes
+function searchGenes() {
+    let genes = [...geneSelect.selectedOptions].map(o => o.value);
+    let selectedCV = cultivar.value; // Wheat Variety selection
+
+    // Start filtering
+    let filteredData = data;
+
+    // If a Wheat Variety is selected, narrow to that cultivar first
+    if (selectedCV) {
+        filteredData = filteredData.filter(x => x.cv === selectedCV);
+    }
+
+    // Then apply gene filtering (AND logic)
+    if (genes.length > 0) {
+        filteredData = filteredData.filter(x =>
+            genes.every(g =>
+                x.Yr.includes(g) || x.Lr.includes(g) || x.Sr.includes(g)
+            )
+        );
+    }
+    searchResults.innerHTML = filteredData.length
+        ? filteredData.map(r => `
+            <div class='result' ><b>${r.cv}</b><br>
+            Yr: ${r.Yr.join(", ")}<br>
+            Lr: ${r.Lr.join(", ")}<br>
+            Sr: ${r.Sr.join(", ")}<br>
+            Level: ${r.level}</div>
+        `).join("")
+        : "<em>No cultivars found.</em>";
+}
+</script>
+
+</body>
+</html>
+
+
