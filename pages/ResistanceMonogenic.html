@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Resistance monogenic Selector</title>
+<style>
+    body{font-family: Arial; margin:40px;}
+    h2{color:#0066aa;}
+    select{padding:6px; font-size:16px;}
+    #list{margin-top:25px; font-size:18px;}
+    li{margin-bottom:4px;}
+  .home-btn{display:inline-flex;align-items:center;gap:6px; background:#ffd166;}
+.home-icon{width:18px;height:18px;display:block;}
+.home-btn:hover{opacity:0.85;}
+</style>
+<link rel="stylesheet" href="lib/bootstrap-icons.css">
+</head>
+<body>
+<a href="../PredictionWheatGene App.html" class="home-btn" style="margin-right:12px;padding:8px 14px;background:#ffd166;color:#000;text-decoration:none;border-radius:8px;font-weight:600;"><i class="bi bi-house"></i>Home</a>
+
+<h2>Select a Resistance Type to Display Gein</h2>
+
+<select id="category" onchange="displayList()">
+    <option value="">-- Select Type --</option>
+    <option value="YR">RE.YR</option>
+    <option value="LR">Re.LR</option>
+    <option value="SR">Re.SR</option>
+</select>
+
+<div id="list"></div>
+
+<script>
+const data = {
+    YR:[
+        "YR5/6*AOC","YR8/6*AOC","YR15/6*AOC","YR17/6*AOC","YR24/3*AOC","YR26/3*AOC",
+        "YR27/6*AOC","OPATA M85","YRSP/6*AOC","SUPER KAUZ","OPATA/PASTOR",
+        "OPATA/PASTOR","YR33","YR37","YR4PL","YRALd","YR57"
+    ],
+    LR:[
+        "NIL-THACHER-LR2A-WST","NIL-THACHER-LR28-CARINA","CS2D-2M-LR28",
+        "NIL-MARQUIS-LR35-T.SP","WL 711","GAZA","TC/4*ST-1","PAVON+LR47",
+        "C78.5","LR53","TC LR28(RL6079)"
+    ],
+    SR:[
+        "ISR5-RA","W2691-SR6MCM","ISR7B-RA","ISR9A-RA","W2691 SR9B","VERNSTEIN-SR9E",
+        "ISR5SB-SR9F","CNS TC 2B/LIN E,SR9G","BTSR 12TC","T.MONOCOCCUN DERIV-SR21,+",
+        "SWSR22T.B.","EXCHANGE-SR23,SRMCN","BTSR 24AG","EAGLE-SR26,SR9G",
+        "COORONG TRITICALE-SR27","W2691 SR28KT","PUSA/EDCH-SR29","BTSR30WST",
+        "C77.19 SR32","TETRA CANTHATCH/AE.SQ-SR33,SR5","COMPARE-SR34",
+        "W3763-SR35","W2691 SR36TT1","W2691 SR37TT2"
+    ]
+};
+
+function displayList(){
+    let type=document.getElementById("category").value;
+    let container=document.getElementById("list");
+
+    if(type===""){ container.innerHTML=""; return; }
+
+    let list = data[type].map(v=>`<li>${v}</li>`).join("");
+    container.innerHTML = `<h3>Varieties List:</h3><ul>${list}</ul>`;
+}
+</script>
+
+</body>
+</html>

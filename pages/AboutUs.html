@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us — Wheat Genes Project</title>
+  <meta name="description" content="Wheat Genes Project — experts, researchers and developers collaborating to advance wheat genetics." />
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#94a3b8;--accent:#ffd166;--glass:rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#071029 0%, #071726 100%);color:#e6eef8;-webkit-font-smoothing:antialiased}
+    .container{max-width:1100px;margin:36px auto;padding:24px}
+    header{display:flex;align-items:center;gap:16px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#72efdd, #4f46e5);display:flex;align-items:center;justify-content:center;font-weight:700;color:#052;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+    h1{margin:0;font-size:1.6rem}
+    p.lead{color:var(--muted);margin-top:6px}
+
+    .intro{margin:20px 0;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .card h2{margin:0 0 8px 0}
+    .role-desc{color:var(--muted);margin:0 0 14px 0}
+
+    .member{display:flex;gap:12px;align-items:flex-start;padding:10px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)}
+    .avatar{width:64px;min-width:64px;height:64px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#052;background:linear-gradient(135deg,#ffd166,#f472b6);}
+    .member h3{margin:0;font-size:1rem}
+    .member p{margin:4px 0 0 0;color:var(--muted);font-size:0.92rem}
+
+    .contact{margin-top:14px;border-top:1px dashed rgba(255,255,255,0.03);padding-top:12px;color:var(--muted)}
+
+    footer{text-align:center;margin-top:28px;color:var(--muted);font-size:0.9rem}
+
+    /* responsive tweaks */
+    @media (max-width:520px){.logo{width:52px;height:52px}.container{padding:16px}}
+  .home-btn{display:inline-flex;align-items:center;gap:6px;}
+.home-icon{width:18px;height:18px;display:block;}
+.home-btn:hover{opacity:0.85;}
+</style>
+<link rel="stylesheet" href="lib/bootstrap-icons.css">
+</head>
+</head>
+<body>
+  <div class="container">
+    <header>
+<a href="../PredictionWheatGene App.html" class="home-btn" style="margin-right:12px;padding:8px 14px;background:var(--accent);color:#000;text-decoration:none;border-radius:8px;font-weight:600;"><i class="bi bi-house"></i>Home</a>
+
+      <div class="logo" aria-hidden>WG</div>
+      <div>
+        <h1>Wheat Genes Project — About Us</h1>
+        <p class="lead">A multidisciplinary team bringing together domain experts, active researchers, and software developers to accelerate wheat genetics research and applied solutions.</p>
+      </div>
+    </header>
+
+    <section class="intro">
+      <strong>Mission:</strong> To catalog, analyse and share high-quality genetic information about wheat to support breeding, disease resistance research, and global food security.
+    
+    </section>
+
+    <main class="grid" role="main">
+      <!-- Experts -->
+      <article class="card" aria-labelledby="experts-title">
+        <h2 id="experts-title">Experts</h2>
+        <p class="role-desc">Senior agronomists, geneticists and plant pathologists who validate domain knowledge, advise on experiment design, and review findings for real-world relevance.</p>
+
+
+        <div class="member" style="margin-top:10px">
+          <div class="avatar">AM</div>
+          <div>
+            <h3>Prof. Reda Omara</h3>
+            <p>Plant pathologist — integrates field surveillance data with genomics to identify emerging threats.</p>
+          </div>
+        </div>
+
+        <div class="contact">Want to collaborate with an expert? <a href="mailto:experts@wheatgenes.org" style="color:var(--accent);text-decoration:none">experts@wheatgenes.org</a></div>
+      </article>
+
+      <!-- Researchers -->
+      <article class="card" aria-labelledby="researchers-title">
+        <h2 id="researchers-title">Researchers</h2>
+        <p class="role-desc">Scientists and analysts performing sequencing, variant discovery, population genetics, and computational modelling to extract insights from wheat genomes.</p>
+	 <div class="member">
+          <div class="avatar">AM</div>
+          <div>
+            <h3>Dr. Ayman Mohamed</h3>
+            <p>Postdoctoral researcher — focuses on DS and AI for machine learning and Deep learning in Agricultural domain.</p>
+          </div>
+        </div>
+        <div class="member">
+          <div class="avatar">NM</div>
+          <div>
+            <h3>Dr. Nivein Moawd</h3>
+            <p>Postdoctoral researcher — focuses on GWAS for yield components and abiotic stress tolerance.</p>
+          </div>
+        </div>
+
+        <div class="member" style="margin-top:10px">
+          <div class="avatar">RE</div>
+          <div>
+            <h3>DR.Rasha El-Namr</h3>
+            <p>Bioinformatician — pipelines for variant calling, pangenome analysis, and reproducible workflows.</p>
+          </div>
+        </div>
+
+        <div class="contact">Interested in data access or collaboration? Email <a href="mailto:aymanada@gmail.com" style="color:var(--accent);text-decoration:none">aymanada@gmail.com</a></div>
+      </article>
+
+      <!-- Developers -->
+      <article class="card" aria-labelledby="devs-title">
+        <h2 id="devs-title">Developers</h2>
+        <p class="role-desc">Software engineers and UX designers building the project's data portals, visualization tools, and analysis pipelines to make genomics accessible.</p>
+
+        <div class="member">
+          <div class="avatar">YA</div>
+          <div>
+            <h3>Youseif Ayman</h3>
+            <p>Full-stack developer — maintains the data portal and API with a focus on performance and security.</p>
+          </div>
+        </div>
+
+       
+
+        <div class="contact">Report a bug or request a feature: <a href="mailto:yous102008@gmail.com" style="color:var(--accent);text-decoration:none">yous102008@gmail.com</a></div>
+      </article>
+
+    </main>
+
+    <footer>
+      &copy; 2025 Wheat Genes App </a>
+    </footer>
+  </div>
+</body>
+</html>
